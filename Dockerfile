@@ -25,8 +25,8 @@ RUN npm run build
 # Create data directory
 RUN mkdir -p /app/data
 
-ENV PORT=3005
-ENV HOST=0.0.0.0
+ENV NITRO_PORT=3005
+ENV NITRO_HOST=0.0.0.0
 EXPOSE 3005
 
 # Run with xvfb for Chrome with virtual display
