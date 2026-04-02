@@ -1,26 +1,13 @@
 services:
   scrapper-nuxt:
     build: .
-    ports:
-      - "3005:3005"
     environment:
       - NITRO_PORT=3005
       - NITRO_HOST=0.0.0.0
       - NODE_ENV=production
     volumes:
       - scraper-data:/app/data
-    networks:
-      - dokploy-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.scrapper-nuxt.rule=Host(`scrapper-nuxt.traefik.me`)"
-      - "traefik.http.routers.scrapper-nuxt.entrypoints=web"
-      - "traefik.http.services.scrapper-nuxt.loadbalancer.server.port=3005"
     restart: unless-stopped
 
 volumes:
   scraper-data:
-
-networks:
-  dokploy-network:
-    external: true
