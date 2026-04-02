@@ -22,11 +22,26 @@ export function parseProducts(rawData: RawProduct[]): Product[] {
 export async function scrapeShopee(): Promise<Product[]> {
   let browser: any = null
   try {
+    // Proxy config from env vars
+    const proxyHost = process.env.PROXY_HOST || ''
+    const proxyPort = parseInt(process.env.PROXY_PORT || '0')
+    const proxyUser = process.env.PROXY_USER || ''
+    const proxyPass = process.env.PROXY_PASS || ''
+    const hasProxy = proxyHost && proxyPort
+
     const connection = await connect({
       headless: false,
       turnstile: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      proxy: hasProxy ? {
+        host: proxyHost,
+        port: proxyPort,
+        username: proxyUser,
+        password: proxyPass,
+      } : undefined,
     })
+
+    if (hasProxy) console.log(`[scraper] Using proxy: ${proxyHost}:${proxyPort}`)
     browser = connection.browser
     const page = connection.page
 

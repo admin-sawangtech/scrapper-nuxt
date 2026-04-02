@@ -5,6 +5,10 @@ services:
       - NITRO_PORT=3005
       - NITRO_HOST=0.0.0.0
       - NODE_ENV=production
+      - PROXY_HOST=${PROXY_HOST}
+      - PROXY_PORT=${PROXY_PORT}
+      - PROXY_USER=${PROXY_USER}
+      - PROXY_PASS=${PROXY_PASS}
     volumes:
       - scraper-data:/app/data
     restart: unless-stopped
