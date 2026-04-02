@@ -29,5 +29,5 @@ ENV NITRO_PORT=3005
 ENV NITRO_HOST=0.0.0.0
 EXPOSE 3005
 
-# Run with xvfb for Chrome with virtual display
-CMD ["xvfb-run", "-a", "-s", "-ac -screen 0 1920x1080x24", "node", ".output/server/index.mjs"]
+# Run with xvfb for Chrome with virtual display (shell form required for xvfb-run)
+CMD xvfb-run -a -s "-ac -screen 0 1920x1080x24" node .output/server/index.mjs
