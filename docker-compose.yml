@@ -1,0 +1,15 @@
+services:
+  scrapper-nuxt:
+    build: .
+    ports:
+      - "3005:3005"
+    environment:
+      - PORT=3005
+      - HOST=0.0.0.0
+      - NODE_ENV=production
+    volumes:
+      - scraper-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  scraper-data:
