@@ -9,7 +9,18 @@ services:
       - NODE_ENV=production
     volumes:
       - scraper-data:/app/data
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.scrapper-nuxt.rule=Host(`scrapper-nuxt.traefik.me`)"
+      - "traefik.http.routers.scrapper-nuxt.entrypoints=web"
+      - "traefik.http.services.scrapper-nuxt.loadbalancer.server.port=3005"
     restart: unless-stopped
 
 volumes:
   scraper-data:
+
+networks:
+  dokploy-network:
+    external: true
