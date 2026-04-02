@@ -22,12 +22,10 @@ export function parseProducts(rawData: RawProduct[]): Product[] {
 export async function scrapeShopee(): Promise<Product[]> {
   let browser: any = null
   try {
-    const chromePath = process.env.CHROME_PATH || undefined
     const connection = await connect({
       headless: false,
       turnstile: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
-      ...(chromePath ? { executablePath: chromePath } : {}),
     })
     browser = connection.browser
     const page = connection.page
